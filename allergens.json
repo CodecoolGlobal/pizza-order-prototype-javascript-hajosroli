@@ -1,0 +1,25 @@
+{
+    "allergens": [
+        {
+            "id": 1,
+            "name": "gluten"
+        },
+        {
+            "id": 2,
+            "name": "egg"
+        },
+        {
+            "id": 3,
+            "name": "milk"
+        },
+        {
+            "id": 4,
+            "name": "fish"
+        },
+        {
+            "id": 5,
+            "name": "peanut"
+        }
+       
+    ]
+}

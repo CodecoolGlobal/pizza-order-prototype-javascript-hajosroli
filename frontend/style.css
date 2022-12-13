@@ -1,0 +1,72 @@
+.background {
+    display: grid;
+    grid-template-columns: 2fr 10fr 2fr;
+    background-color: rgb(53, 7, 15);
+}
+.frame {
+    display: grid;
+    /*grid-template-columns: 1fr 10fr 1fr;*/
+    background-color: rgb(255, 136, 146);
+    border-radius: 20px;
+    grid-column: 2;
+    grid-template-rows: 1fr 10fr;
+    
+    
+}
+.toolbar {
+    grid-row: 1;
+    
+    
+
+}
+ul {
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+    background-color: black;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    /*grid-column: 2;*/
+    
+}
+
+li {
+    float: left;
+    
+}
+
+li a  {
+    display: block;
+    
+   
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 30px;
+    text-decoration: none;
+    font-size: 17px;
+    justify-self: center;
+}
+li a:hover {
+    background-color: grey;
+  }
+li {
+    cursor: pointer;
+}
+/*.menu {
+    background-color: black;
+    color: white;
+    font-size: 20px;
+    padding: 1.5%;
+    float: left;
+    padding-inline: 10%;
+    justify-self: center;
+}*/
+
+#home {
+    border-bottom-left-radius: 15px;
+}
+#contact, #cart {
+    float:right;
+    
+}

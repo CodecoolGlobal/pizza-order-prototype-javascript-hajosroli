@@ -1,1 +1,119 @@
-{}
+{
+    "pizzas": [
+        {
+            "id": 1,
+            "name": "Marinara",
+            "ingredients": [
+                "San Marzano tomato sauce",
+                "garlic",
+                "oregano",
+                "olive oil"
+            ],
+            "price": 3200,
+            "allergens": [
+                1
+            ]
+        },
+        {
+            "id": 2,
+            "name": "Ham & Corn",
+            "ingredients": [
+                "ham",
+                "corn",
+                "mozzarella",
+                "tomato sauce"
+            ],
+            "price": 3300,
+            "allergens": [
+                1,
+                3
+                
+            ]
+        },
+        {
+            "id": 3,
+            "name": "Hawaii",
+            "ingredients": [
+                "tomato sauce",
+                "ham",
+                "pineapple",
+                "mozarella"
+            ],
+            "price": 3500,
+            "allergens": [
+                1,
+                3
+            ]
+        },
+        {
+            "id": 4,
+            "name": "Tonno",
+            "ingredients": [
+                "tomato sauce",
+                "purple onion",
+                "olives",
+                "olive oil",
+                "tuna",
+                "mozarella"
+            ],
+            "price": 3600,
+            "allergens": [
+                1,
+                3,
+                4
+            ]
+        },
+        {
+            "id": 5,
+            "name": "Pollo",
+            "ingredients": [
+                "tomato sauce",
+                "garlic",
+                "oregano",
+                "olive oil",
+                "chicken",
+                "fried eggs"
+            ],
+            "price": 3500,
+            "allergens": [
+                1,
+                2,
+                3
+            ]
+        },
+        {
+            "id": 6,
+            "name": "Carbonara",
+            "ingredients": [
+                "garlic",
+                "oregano",
+                "olive oil",
+                "purple onion",
+                "eggs",
+                "ham"
+            ],
+            "price": 3200,
+            "allergens": [
+                1,
+                2,
+                3
+                
+            ]
+        },
+        {
+            "id": 7,
+            "name": "Nuttee",
+            "ingredients": [
+                "Nutella",
+                "mascarpone",
+                "sour cream"
+            ],
+            "price": 3500,
+            "allergens": [
+                1,
+                3,
+                5
+            ]
+        }
+    ]
+}
