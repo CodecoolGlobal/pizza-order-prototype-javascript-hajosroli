@@ -12,13 +12,19 @@ app.get('/', (req, res) => {
   })
 
 app.get('/api/pizza', (req, res) => {
-    
     res.send((fs.readFileSync(filePath).toString()))
-    
+})
+
+app.get("/pizzas", async (req, res) => {
+  res.send(fs.readFileSync(filePath).toString())
 })
 
 app.get("/pizzas/list", async (req, res) => {
-  res.send(fs.readFileSync(filePath).toString())
+  res.send(fs.readFileSync("./frontend/pizzas/pizzas.html").toString())
+})
+
+app.get("/api/allergens", async(req, res) => {
+  res.send(fs.readFileSync("./allergens.json").toString())
 })
 
 app.use(express.static('./frontend'))
