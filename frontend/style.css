@@ -9,13 +9,11 @@
     background-color: rgb(255, 136, 146);
     border-radius: 20px;
     grid-column: 2;
-    grid-template-rows: 1fr 10fr;
-    
-    
+    grid-template-rows: 5% auto;
+    padding-bottom: 50px;
 }
 .toolbar {
     grid-row: 1;
-    
     
 
 }
@@ -69,4 +67,52 @@ li {
 #contact, #cart {
     float:right;
     
+}
+
+.container {
+    /* grid-template-columns: 1fr 1fr; */
+    position: relative;
+    display: block;
+    grid-row: 2;
+    height: fit-content;
+    justify-content: center;
+    margin-left: 6%;
+}
+
+.cards {
+        background: rgba(0, 0, 0, 0.733);
+        border-radius: 9px;
+        border-style:groove;    
+        margin-left: 4%;
+        margin-bottom: 6%;
+        display: grid;
+        grid-template-rows: 3fr 3fr 3fr 1fr;
+        grid-template-columns: 1fr;
+        font-size: 20px;
+        color: white;
+        box-shadow: 25px 25px 40px 0px rgba(0,0,0,0.33);
+        height: 300px;
+        width: 40%;
+        float: left;
+        overflow: hidden;
+}
+
+.img {
+    width: 100%;
+    grid-column: 1;
+    grid-row-end: span 4;
+}
+
+.cards:hover {
+    animation-duration: 1s;
+    animation-name: slideLeft;
+}
+
+@keyframes slideLeft {
+    from {
+        grid-template-columns: 100%;
+    }
+    to {
+        grid-template-columns: 1fr 1fr;
+    }
 }

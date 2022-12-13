@@ -5,5 +5,9 @@ pizzaList.addEventListener("click", async() => {
     console.log("works")
     const list = await fetch("http://localhost:3000/pizzas/list")
     const convertedList = await list.json()
-    console.log(convertedList)
+    pushDataToClient(convertedList)
 })
+
+function pushDataToClient(obj) {
+
+}
