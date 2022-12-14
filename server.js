@@ -7,12 +7,41 @@ const port = 3000;
 
 app.use(express.json());
 app.get('/', (req, res) => {
-    console.log(req.url)
-    res.send((fs.readFileSync('./frontend/index.html').toString()))
-  })
+  console.log(req.url)
+  res.send((fs.readFileSync('./frontend/index.html').toString()))
+})
 
 app.get('/api/pizza', (req, res) => {
-    res.send((fs.readFileSync(filePath).toString()))
+  res.send((fs.readFileSync(filePath).toString()))
+})
+
+app.get('/api/orders', (req, res) => {
+
+})
+
+app.get('/api/cart', (req, res) => {
+  res.send((fs.readFileSync("./cart.json").toString()))
+})
+
+app.delete('/api/:target/:itemID', async (req, res) => {
+  console.log("works")
+  const itemID = parseInt(req.params.itemID)
+  const target = req.params.target
+  executeDeletion(target, itemID)
+  res.send("DONE")
+})
+
+app.get('/cart', (req, res) => {
+  res.send((fs.readFileSync("./frontend/cart/cart.html").toString()))
+})
+
+app.get('/cart/additem/:itemID', async (req, res) => {
+  const items = await JSON.parse(fs.readFileSync("./pizza.json"))
+  let data = await JSON.parse(fs.readFileSync("./cart.json"))
+  const itemID = parseInt(req.params.itemID)
+  data.cart[0].cartContent.push(items.pizzas[itemID - 1])
+  fs.writeFileSync("./cart.json", JSON.stringify(data, null, 2))
+  res.send("DONE")
 })
 
 app.get("/pizzas", async (req, res) => {
@@ -23,11 +52,34 @@ app.get("/pizzas/list", async (req, res) => {
   res.send(fs.readFileSync("./frontend/pizzas/pizzas.html").toString())
 })
 
-app.get("/api/allergens", async(req, res) => {
+app.get("/api/allergens", async (req, res) => {
   res.send(fs.readFileSync("./allergens.json").toString())
 })
 
 app.use(express.static('./frontend'))
 app.listen(port, () => {
-    console.log(`The pizza ordering is online! Go to http://localhost:${port}`)
-  })
+  console.log(`The pizza ordering is online! Go to http://localhost:${port}`)
+})
+
+function executeDeletion(target, itemID) {
+  switch (target) {
+    case "cart":
+      deleteFromCart(itemID)
+      break;
+
+    case "orders":
+      deleteFromOrders(itemID)
+      break;
+  }
+}
+
+async function deleteFromCart(itemID) {
+  console.log("naaaaa")
+  let data = await JSON.parse(fs.readFileSync("./cart.json"))
+  data.cart[0].cartContent = await data.cart[0].cartContent.filter(element => element.id !== itemID)
+  fs.writeFileSync("./cart.json", JSON.stringify(data, null, 2))
+  console.log("deletion done")
+}
+async function deleteFromOrders(itemID) {
+  //let data = await JSON.parse(fs.readFileSync("./orders.json"))
+}

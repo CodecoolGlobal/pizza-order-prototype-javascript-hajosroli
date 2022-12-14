@@ -1,0 +1,14 @@
+{
+  "cart": [
+    {
+      "userID": "developer",
+      "referID": 0,
+      "cartContent": []
+    },
+    {
+      "userID": "123456",
+      "referID": 1,
+      "cartContent": []
+    }
+  ]
+}

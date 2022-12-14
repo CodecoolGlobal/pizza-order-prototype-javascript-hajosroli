@@ -104,7 +104,7 @@ label {
 .overlay {
     display: grid;
     grid-template-rows: 1fr 1fr 1fr auto;
-    
+    padding: 3px;
     position: absolute;
     bottom: 0;
     left: 100%;
@@ -137,19 +137,26 @@ label {
     margin-bottom: 5px;
 }
 
-#order {
+
+
+#price {
     position: relative;
     grid-row: 4;
-    justify-self: end;
-    
+    justify-self: start;
 }
 
-#orderButton {
+#quantity {
+    position: relative;
     background-color: rgba(0, 0, 0, 0.285);
     border-radius: 10px;
-    
-    font-size: 12px;
-    padding: 10px 24px;
+    grid-row: 4;
+    font-size: 8px;
+    padding: 5px 10px;
+    justify-self: end;
+}
+
+.quantityInput {
+    width: 30px;
 }
 
 .container {
