@@ -36,10 +36,10 @@ function createCards(obj, allergens) {
             <div id="name"><strong>${pizza.name}</strong>
             </div> <br>
             <div id="ingredients"><strong>Ingredients:</strong> <br>
-            <b>${ingredientsList}</b>
+            ${ingredientsList}
             </div> <br>
             <div id="allergens"><strong>Allergens:</strong> <br>
-            <b>${allergensListWithTitles}</b>
+            ${allergensListWithTitles}
             </div>
             
         </div>

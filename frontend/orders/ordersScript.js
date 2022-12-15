@@ -3,15 +3,24 @@
 //CART SCRIPT
 orderInit();
 
+
+let clickCounter = 0;
 async function orderInit() {
     
     const order = await (await fetch("http://localhost:3000/api/orders")).json();      //ENDPOINT COULD BE /cart/<userID> IF WE HAD DIFFERENT CUSTOMERS
     const pizzaList = await (await fetch("http://localhost:3000/api/pizza")).json();
     console.log(pizzaList) 
-    pushDataToClient(order.orders, pizzaList);   
+    pushDataToClient(order.orders, pizzaList); 
+    
+    document.querySelectorAll('.orderDiv').forEach(item => {
+        item.addEventListener('click', event => {
+             item.innerHTML = createCards(order.orders, pizzaList)
+        })
+      })
+
 }
 
-function pushDataToClient(obj, pizzaList) {
+     function pushDataToClient(obj, pizzaList) {
     console.log("works")
     const frame = document.querySelector(".frame")
     const cardsHTML = createCards(obj, pizzaList);
@@ -22,33 +31,29 @@ function pushDataToClient(obj, pizzaList) {
     orderButton.classList.add("orderButton");
    // orderButton.innerHTML = cardsHTML;
     console.log(container.innerHTML)
-    console.log(orderButtc 
-    container.innerHTML = createOrder(ore);
+    
+     container.innerHTML = createOrder(obj);
     frame.appendChild(container); 
 }
-function createOrder(obj, pizzaList){
+function createOrder(obj){
     let orderHtml = "";
-    let totalPrice = 0;
     for (let order of obj) {
         console.log(order)
-        
-            for (let pizza of order.pizzas){
-                // pizza.id -> 1,
-                // pizzaObj.pizzas[pizza.id-1].name
-                let pizzaName = pizzaList.pizzas[parseInt(pizza.id)-1].name
-                let pizzaPrice =  parseInt(pizza.amount) * parseInt(pizzaList.pizzas[parseInt(pizza.id)-1].price);
-                totalPrice += pizzaPrice;
+                let customerId = order.id;
+                let customerName = order.customer.name;
 
-        const orderTemplate = `
-        <div id="name"><strong>Customer ID:${order.id}</strong>
-        </div>
-        <div id="customerName"><strong>Customer's Name:</strong>${order.customer.name}</div>
-        <div id="totalPrice"><strong>Total Price: ${totalPrice}</strong></div> 
-    </div>
-        `
-        orderHtml += orderTemplate;
-            }}
-            return orderHtml;
+                const orderTemplate = `
+                <button class="orderDiv" id="cl">
+                <div id="orderItems"><strong>Customer ID:  </strong>${customerId}
+                </div>
+                <div id="orderItems"><strong>Customer's Name:  </strong>${customerName}</div>
+                <div id="orderItems"><strong>Date:</strong></div> 
+            </button>
+                `
+                orderHtml += orderTemplate;
+            }
+            
+            return orderHtml ;
 }
 
 function createCards(obj, pizzaList) {
@@ -66,21 +71,21 @@ function createCards(obj, pizzaList) {
     <div class="order" id="${pizza.alt_name}">
         <div id="name"><strong>Customer ID:${order.id}</strong>
         </div> <br>
+        <div id="customerName"><strong>Customer's Name:</strong>${order.customer.name} <br>
+        <strong>E-mail: </strong>${order.customer.email}<br>
+        <strong>Address:</strong>${order.customer.address.city} , ${order.customer.address.street}
+        </div><br>
         <div id="pizzaName"><strong>Pizza name:</strong>${pizzaName} <br>
         <strong>Amount:</strong>${pizza.amount}<br>
-        <strong>Special requests:</strong>${pizza.special}
+        <strong>Special requests:</strong>${pizza.specials}
         </div> <br>
-        <div id="customerName"><strong>Customer's Name:</strong>${order.customer.name} <br>
-        <b>${order.customer.email}</b><br>
-        <b>${order.customer.address}
-        </div>
-        <div id="price"><strong>Price: ${pizzaPrice}</strong></div> 
+        <div id="price"><strong>Price: ${pizzaPrice}</strong></div><br>
         <div id="totalPrice"><strong>Total Price: ${totalPrice}</strong></div> 
-    </div>
+    </div><br>
     `;
-        cardsHTML += cardTemplate;
-         } }
-    return cardsHTML + "</div>";
+    cardsHTML += cardTemplate;
+         } return cardsHTML + "</div>";}
+    
 }
 
 function getInfoAboutElement(list) {

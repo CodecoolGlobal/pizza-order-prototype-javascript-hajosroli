@@ -94,7 +94,7 @@ async function deleteRequests(itemID, target, id) {
         console.log(container.lastElementChild)
         if (container.lastElementChild === null) {
             formContainer.innerHTML = checkCart(container)
-            container.innerHTML = "Cart is Empty! Go to Pizzas to add Pizza to Cart"
+            container.innerHTML = "Cart is Empty! Go to Pizzas to add pizza to Cart!"
     }
     }
 }
