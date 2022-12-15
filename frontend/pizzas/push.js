@@ -37,6 +37,11 @@ async function init(filter) {
     else {
         pushDataToClient(convertedList, convertedAllergens.allergens)
     }
+    document.querySelectorAll('#orderButton').forEach(item => {
+        item.addEventListener('click', event => {
+             item.style.display = 'none';
+        })
+      })
 
 }
 
@@ -152,4 +157,6 @@ function createFilter(obj) {
 
 function sendItemToCart(itemID) {
     fetch(`http://localhost:3000/cart/additem/${itemID}`)
+
+
 }
