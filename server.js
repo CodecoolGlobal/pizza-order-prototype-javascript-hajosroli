@@ -1,3 +1,6 @@
+const bodyParser = require('body-parser');
+const multer = require('multer');
+const upload = multer();
 const express = require('express')
 const app = express()
 const path = require("path");
@@ -15,24 +18,34 @@ app.get('/api/pizza', (req, res) => {
   res.send((fs.readFileSync(filePath).toString()))
 })
 
-app.get('/api/orders', (req, res) => {
-
-})
-
 app.get('/api/cart', (req, res) => {
   res.send((fs.readFileSync("./cart.json").toString()))
 })
 
+app.get('/api/orders', (req, res) => {
+  res.send((fs.readFileSync("./orders.json").toString()))
+})
+
+app.post('/api/orders', async(req, res) => {
+  const form = await req.body
+  console.log(req.body)
+  res.send((fs.readFileSync("./frontend/cart/cart.html").toString()))
+})
+
 app.delete('/api/:target/:itemID', async (req, res) => {
-  console.log("works")
   const itemID = parseInt(req.params.itemID)
   const target = req.params.target
+  if(itemID === undefined) console.log("success")
   executeDeletion(target, itemID)
   res.send("DONE")
 })
 
 app.get('/cart', (req, res) => {
   res.send((fs.readFileSync("./frontend/cart/cart.html").toString()))
+})
+
+app.get('/orders', (req, res) => {
+  res.send((fs.readFileSync("./frontend/orders/orders.html").toString()))
 })
 
 app.get('/cart/additem/:itemID', async (req, res) => {
@@ -55,7 +68,12 @@ app.get("/pizzas/list", async (req, res) => {
 app.get("/api/allergens", async (req, res) => {
   res.send(fs.readFileSync("./allergens.json").toString())
 })
-
+app.use(upload.array()); 
+app.use(bodyParser.urlencoded({ extended: true })); 
+app.use(express.json());       // to support JSON-encoded bodies
+app.use(express.urlencoded({
+  extended: true
+}));
 app.use(express.static('./frontend'))
 app.listen(port, () => {
   console.log(`The pizza ordering is online! Go to http://localhost:${port}`)
@@ -74,12 +92,11 @@ function executeDeletion(target, itemID) {
 }
 
 async function deleteFromCart(itemID) {
-  console.log("naaaaa")
   let data = await JSON.parse(fs.readFileSync("./cart.json"))
   data.cart[0].cartContent = await data.cart[0].cartContent.filter(element => element.id !== itemID)
   fs.writeFileSync("./cart.json", JSON.stringify(data, null, 2))
-  console.log("deletion done")
 }
 async function deleteFromOrders(itemID) {
-  //let data = await JSON.parse(fs.readFileSync("./orders.json"))
+  let data = await JSON.parse(fs.readFileSync("./orders.json"))
+  data.orders[0].orderContent = await data.orders[0].orderContent.filter(element => element.id !== itemID)
 }

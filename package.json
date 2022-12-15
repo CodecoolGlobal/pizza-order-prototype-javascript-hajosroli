@@ -19,7 +19,9 @@
   },
   "homepage": "https://github.com/CodecoolGlobal/pizza-order-prototype-javascript-hajosroli#readme",
   "dependencies": {
-    "express": "^4.18.2"
+    "body-parser": "^1.20.1",
+    "express": "^4.18.2",
+    "multer": "^1.4.5-lts.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.20"
