@@ -168,12 +168,14 @@ label {
     display: flex;
     align-items: baseline;
     width: 70%;
+    height: fit-content;
     margin: 20px;
     font-size: 24px;
     border-radius: 8px;
+    float: left;
 }
 
-#orderItems {
+.orderItems {
     padding: 6px;
     padding-inline: 10px;
 }

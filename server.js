@@ -27,8 +27,8 @@ app.get('/api/orders', (req, res) => {
 })
 
 app.post('/api/orders', async(req, res) => {
-  const form = await req.body
-  console.log(req.body)
+  const data = req.body;
+  addOrderToFile(data)
   res.send((fs.readFileSync("./frontend/cart/cart.html").toString()))
 })
 
@@ -96,7 +96,13 @@ async function deleteFromCart(itemID) {
   data.cart[0].cartContent = await data.cart[0].cartContent.filter(element => element.id !== itemID)
   fs.writeFileSync("./cart.json", JSON.stringify(data, null, 2))
 }
-async function deleteFromOrders(itemID) {
+async function deleteFromOrders(orderID) {
   let data = await JSON.parse(fs.readFileSync("./orders.json"))
   data.orders[0].orderContent = await data.orders[0].orderContent.filter(element => element.id !== itemID)
+}
+
+async function addOrderToFile(order) {
+  let data = await JSON.parse(fs.readFileSync("./orders.json"))
+  data.orders.push(order);
+  fs.writeFileSync("./orders.json", JSON.stringify(data, null, 2))
 }

@@ -121,9 +121,10 @@ function createForm() { //enctype="application/json"
     <h1>Order</h1>
     First name: <input id="formInputFName" type="text" name="firstname" placeholder="John"><br/>
     Last name: <input id="formInputLName" type="text" name="lastname" placeholder="Smith"><br/>
-      Address:  <input id="formInputAddress" type="adress" name="adress" placeholder="1234 Street City, ST Zip">
+    City:   <input id="formInputCity" type="address" name="address" placeholder="Los Angeles"><br/>
+    Address:  <input id="formInputAddress" type="address" name="address" placeholder="1592 Mulholland Drive">
    <br/>
-      E-mail:  <input id="formInputEmail" type="email" name="email" placeholder="pizza@email.com">
+    E-mail:  <input id="formInputEmail" type="email" name="email" placeholder="pizza@email.com">
    <br/>
       <p>Special requests (You can check both)</p>
       <input id="formInputGluten" type='checkbox'>Gluten-free
@@ -149,50 +150,64 @@ function checkCart(element){
 
 async function sendOrder() {
     console.log("works")
+    const prevOrders = await (await fetch("http://localhost:3000/api/orders")).json();
     const cart = await (await fetch("http://localhost:3000/api/cart")).json();
-    createOrderForm(cart)
+    const form = JSON.stringify(createOrderForm(cart, prevOrders));
     
-    //const msg = await fetch()
+    const msg = await fetch("http://localhost:3000/api/orders", {
+        method: "POST",
+        headers: {
+            "Content-type": "application/json"
+        },
+        body: form
+    });
 }
 
-function createOrderForm(cart) {
+function createOrderForm(cart, prevOrders) {
     const FName = document.querySelector("#formInputFName").value
     const LName = document.querySelector("#formInputLName").value
+    const City = document.querySelector("#formInputCity").value
     const Address = document.querySelector("#formInputAddress").value
     const Email = document.querySelector("#formInputEmail").value
-    const Gluten = document.querySelector("#formInputGluten").value
-    const Lactose = document.querySelector("#formInputLactose").value
+    const GlutenBox = document.querySelector("#formInputGluten").checked
+    const LactoseBox = document.querySelector("#formInputLactose").checked
     const Comms = document.querySelector("#formInputComms").value
+    const orderID = prevOrders.orders.length
 
-    let pizzaList = []
+    let pizzaList = [];
     for (let pizza of cart.cart[0].cartContent) {
-        console.log("asd")
+        let Gluten = "Gluten-free";
+        let Lactose = "Lactose-free";
+        if (!GlutenBox) Gluten = "-";
+        if (!LactoseBox) Lactose = "-";
         const amount = document.getElementById(`quantityInput${pizza.id}`).value
-        console.log(amount)
-        console.log(Gluten)
-        pizzaList.push[{"id": pizza.id, "amount": amount, "specials": [Gluten, Lactose]}]
+        pizzaList.push({"id": pizza.id, "amount": amount, "specials": [Gluten, Lactose]})
     }
-    console.log(pizzaList)
-
-
-
+    const date = getDateNow();
     const formData = {
-        "id": 0,
-        "pizzas": [ {"id": 1, "amount": 2, "specials": []}, {"id": 2, "amount": 1, "specials": []} ],
+        "id": orderID,
+        "pizzas": pizzaList,
         "date": {
-            "year": 2022,
-            "month": 6,
-            "day": 7,
-            "hour": 18,
-            "minute": 47
+            "year": date.year,
+            "month": date.month,
+            "day": date.day,
+            "hour": date.hour,
+            "minute": date.minute
           },
-          "customer": {
-            "name": "John Doe",
-            "email": "jd@example.com",
+        "customer": {
+            "name": `${FName} ${LName}`,
+            "email": Email,
             "address": {
-            "city": "Palermo",
-            "street": "Via Appia 6"
+            "city": City,
+            "street": Address
             }
-          }
+          },
+        "comments": Comms
     }
+    return formData;
+}
+
+function getDateNow() {
+const date = new Date;
+return {year: date.getFullYear(), month: date.getMonth()+1, day: date.getDate(), hour: date.getHours(), minute: date.getMinutes()}    
 }
