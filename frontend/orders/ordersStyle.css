@@ -3,6 +3,7 @@
     grid-template-columns: 2fr 10fr 2fr;
     background-color: rgb(53, 7, 15);
 }
+
 .frame {
     display: grid;
     /*grid-template-columns: 1fr 10fr 1fr;*/
@@ -12,16 +13,17 @@
     grid-template-rows: 50px 90px auto;
     padding-bottom: 50px;
 }
+
 .toolbar {
     grid-row: 1;
-    
+
 
 }
 
 #pageTitle {
     font-size: 40px;
     color: white;
-    
+
 }
 
 .links {
@@ -33,18 +35,18 @@
     padding: 0;
     overflow: hidden;
     /*grid-column: 2;*/
-    
+
 }
 
 li {
     float: left;
-    
+
 }
 
-li a  {
+li a {
     display: block;
-    
-   
+
+
     color: #f2f2f2;
     text-align: center;
     padding: 14px 30px;
@@ -52,12 +54,15 @@ li a  {
     font-size: 17px;
     justify-self: center;
 }
+
 li a:hover {
     background-color: grey;
-  }
+}
+
 li {
     cursor: pointer;
 }
+
 /*.menu {
     background-color: black;
     color: white;
@@ -68,9 +73,10 @@ li {
     justify-self: center;
 }*/
 
-#contact, #cart {
-    float:right;
-    
+#contact,
+#cart {
+    float: right;
+
 }
 
 .filterMenu {
@@ -87,6 +93,7 @@ li {
     align-self: center;
     align-items: center;
 }
+
 #filterTitle {
     display: flex;
     grid-column: 1;
@@ -100,10 +107,12 @@ li {
     float: left;
     padding-inline-start: 0px;
 }
+
 .filterList {
     list-style-type: none;
     padding-inline-start: 0px;
 }
+
 label {
     margin-right: 10px;
 }
@@ -122,7 +131,7 @@ label {
     height: 100%;
     backdrop-filter: blur(5px);
     transition: .5s ease;
-  }
+}
 
 #name {
     position: relative;
@@ -134,7 +143,7 @@ label {
     position: relative;
     grid-row: 2;
     justify-self: start;
-    
+
 }
 
 #allergens {

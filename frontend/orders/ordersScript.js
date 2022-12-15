@@ -3,8 +3,6 @@
 //CART SCRIPT
 orderInit();
 
-
-let clickCounter = 0;
 async function orderInit() {
 
     const order = await (await fetch("http://localhost:3000/api/orders")).json();      //ENDPOINT COULD BE /cart/<userID> IF WE HAD DIFFERENT CUSTOMERS
@@ -18,8 +16,8 @@ async function orderInit() {
                 item.innerHTML = createCards(order.orders, pizzaList, orderID);
             } else {
                 const orderID = parseInt(item.id[item.id.length - 1]);
-                item.innerHTML =  createOrder(order.orders, true, orderID);
-            } 
+                item.innerHTML = createOrder(order.orders, true, orderID);
+            }
 
         })
     })
@@ -57,17 +55,17 @@ function createOrder(obj, onlyDetails, orderID) {
             orderHtml += orderTemplate;
         }
     } else {
-            const order = obj[orderID]
-            const customerId = order.id;
-            const customerName = order.customer.name;
-            const date = `${order.date.year}-${order.date.month}-${order.date.day}`
+        const order = obj[orderID]
+        const customerId = order.id;
+        const customerName = order.customer.name;
+        const date = `${order.date.year}-${order.date.month}-${order.date.day}`
 
-            const orderTemplate = `
+        const orderTemplate = `
                 <div class="orderItems"><strong>Order ID:  </strong>${customerId}</div>
                 <div class="orderItems"><strong>Customer's Name:  </strong>${customerName}</div>
                 <div class="orderItems"><strong>Date: </strong>${date}</div> 
                 `
-            orderHtml += orderTemplate;
+        orderHtml += orderTemplate;
     }
 
     return orderHtml;
@@ -76,7 +74,6 @@ function createOrder(obj, onlyDetails, orderID) {
 function createCards(obj, pizzaList, orderID) {
     let totalPrice = 0;
     let order = obj[orderID];
-
     let cardTemplate = `
         <center><div class="order" id="${order.id}">
             <div id="name">
@@ -87,6 +84,9 @@ function createCards(obj, pizzaList, orderID) {
                 <strong>E-mail: </strong> ${order.customer.email}<br>
                 <strong>Address:</strong> ${order.customer.address.city}, ${order.customer.address.street}
             </div><br>
+            <div id="comment">
+                <strong>Comment:</strong> ${order.comments}
+            </div> <br>
         </div><br>
         `
     for (let pizza of order.pizzas) {

@@ -4,53 +4,8 @@
       "id": 0,
       "pizzas": [
         {
-          "id": 1,
-          "amount": "2",
-          "specials": [
-            "Gluten-free",
-            "-"
-          ]
-        },
-        {
-          "id": 2,
-          "amount": "3",
-          "specials": [
-            "Gluten-free",
-            "-"
-          ]
-        },
-        {
           "id": 3,
-          "amount": "1",
-          "specials": [
-            "Gluten-free",
-            "-"
-          ]
-        }
-      ],
-      "date": {
-        "year": 2022,
-        "month": 12,
-        "day": 15,
-        "hour": 20,
-        "minute": 11
-      },
-      "customer": {
-        "name": "Kristóf Szova",
-        "email": "szova.kristof@gmail.com",
-        "address": {
-          "city": "Budapest",
-          "street": "Bihari 3c"
-        }
-      },
-      "comments": "asd"
-    },
-    {
-      "id": 1,
-      "pizzas": [
-        {
-          "id": 6,
-          "amount": "1",
+          "amount": "2",
           "specials": [
             "Gluten-free",
             "Lactose-free"
@@ -58,7 +13,7 @@
         },
         {
           "id": 7,
-          "amount": "1",
+          "amount": "3",
           "specials": [
             "Gluten-free",
             "Lactose-free"
@@ -69,18 +24,18 @@
         "year": 2022,
         "month": 12,
         "day": 15,
-        "hour": 20,
-        "minute": 41
+        "hour": 22,
+        "minute": 58
       },
       "customer": {
-        "name": "Kristóf Szova",
-        "email": "szova.kristof@gmail.com",
+        "name": "Roland Aki Szereti a faszt",
+        "email": "rolikaaa",
         "address": {
-          "city": "Bud",
-          "street": "ASD"
+          "city": "Budapest",
+          "street": "123"
         }
       },
-      "comments": "asdasdasd"
+      "comments": "asd"
     }
   ]
 }

@@ -2,10 +2,10 @@
 //CART SCRIPT
 cartInit();
 
-async function cartInit(update) {
+async function cartInit() {
     const cart = await (await fetch("http://localhost:3000/api/cart")).json();      //ENDPOINT COULD BE /cart/<userID> IF WE HAD DIFFERENT CUSTOMERS
     const allergens = await (await fetch("http://localhost:3000/api/allergens")).json();
-    pushDataToClient(cart.cart[0], allergens.allergens)    
+    pushDataToClient(cart.cart[0], allergens.allergens)
 }
 
 function pushDataToClient(obj, allergens) {
@@ -18,20 +18,20 @@ function pushDataToClient(obj, allergens) {
     container.classList.add("container");
     formContainer.classList.add("formContainer")
     container.innerHTML = cardsHTML;
-    formContainer.innerHTML = checkCart(container);
-    //formContainer.innerHTML = formHtml;
+    const data = checkCart(container);
+    formContainer.innerHTML = data[0];
+    container.innerHTML += data[1]
     frame.appendChild(container);
     frame.appendChild(formContainer)
     const orderButton = document.querySelector("#formInput")
-    orderButton.addEventListener("click", ()=> sendOrder())
+    orderButton.addEventListener("click", () => sendOrder())
 }
 
 
 function createCards(obj, allergens) {
     let cardsHTML = ""
-    console.log(obj)
+    if (obj === undefined) return "";
     for (let pizza of obj.cartContent) {
-        console.log(pizza.alt_name)
         const ingredientsList = getInfoAboutElement(pizza.ingredients);
         const allergensListWithTitles = makeAllergensTitled(pizza.allergens, allergens)
         const cardTemplate = ` 
@@ -51,7 +51,7 @@ function createCards(obj, allergens) {
             <button onclick="decreaseQuantity(${pizza.id})">-</button>
             <input class="quantityInput" id="quantityInput${pizza.id}" type="number" value="1" min="1">
             <button onclick="increaseQuantity(${pizza.id})">+</button>
-            <button onclick="deleteRequests(${pizza.id}, 'cart', '${pizza.alt_name}')">Remove</button>
+            <button onclick="deleteRequests('cart', '${pizza.id}', '${pizza.alt_name}')">Remove</button>
             </div>    
         </div>
     </div>
@@ -79,34 +79,34 @@ function makeAllergensTitled(list, allergens) {
     return allergensList.slice(0, allergensList.length - 7) + "</div>";
 }
 
-async function deleteRequests(itemID, target, id) {
-    console.log("id:" + id)
-    const HTMLElement = document.querySelector(`#${id}`)
-    const formContainer = document.querySelector(".formContainer")
-    console.log(HTMLElement)
-    const container = document.querySelector(".container")
+async function deleteRequests(target, itemID, id) {
+    if (itemID) {
+        const HTMLElement = document.querySelector(`#${id}`)
+        const formContainer = document.querySelector(".formContainer")
+        const container = document.querySelector(".container")
+        if (target == "cart") {
+            deleteElementsFromHTML(container, HTMLElement)
+            if (container.lastElementChild === null) {
+                const data = checkCart(container)
+                formContainer.innerHTML = data[0]
+                container.innerHTML = data[1]
+            }
+        }
+    }
     const msg = await fetch(`http://localhost:3000/api/${target}/${itemID}`, {
         method: "DELETE"
     })
-    if (target == "cart") {
-        deleteElementsFromHTML(container, HTMLElement)
-        console.log(container.innerHTML )
-        console.log(container.lastElementChild)
-        if (container.lastElementChild === null) {
-            formContainer.innerHTML = checkCart(container)
-            container.innerHTML = "Cart is Empty! Go to Pizzas to add pizza to Cart!"
-    }
-    }
+
 }
 
-function increaseQuantity(id){
+function increaseQuantity(id) {
     const input = document.getElementById(`quantityInput${id}`)
     input.value++
 }
 
-function decreaseQuantity(id){
+function decreaseQuantity(id) {
     const input = document.getElementById(`quantityInput${id}`)
-    if(input.value > 1) input.value--
+    if (input.value > 1) input.value--
 }
 
 function deleteElementsFromHTML(parent, child) {
@@ -139,21 +139,19 @@ function createForm() { //enctype="application/json"
     return formTemplate;
 }
 
-function checkCart(element){
+function checkCart(element) {
     const formHtml = createForm();
-    console.log(element.lastElementChild)
-    if(element.lastElementChild == null){
-        return "";
+    if (element.lastElementChild == null) {
+        return ["", "Cart is Empty! Go to Pizzas to add pizza to Cart!"];
     }
-    else return formHtml;
+    else return [formHtml, ""];
 }
 
 async function sendOrder() {
-    console.log("works")
     const prevOrders = await (await fetch("http://localhost:3000/api/orders")).json();
     const cart = await (await fetch("http://localhost:3000/api/cart")).json();
     const form = JSON.stringify(createOrderForm(cart, prevOrders));
-    
+
     const msg = await fetch("http://localhost:3000/api/orders", {
         method: "POST",
         headers: {
@@ -161,6 +159,8 @@ async function sendOrder() {
         },
         body: form
     });
+    deleteRequests("cart");
+    window.location.href = "http://localhost:3000/orders";
 }
 
 function createOrderForm(cart, prevOrders) {
@@ -181,7 +181,7 @@ function createOrderForm(cart, prevOrders) {
         if (!GlutenBox) Gluten = "-";
         if (!LactoseBox) Lactose = "-";
         const amount = document.getElementById(`quantityInput${pizza.id}`).value
-        pizzaList.push({"id": pizza.id, "amount": amount, "specials": [Gluten, Lactose]})
+        pizzaList.push({ "id": pizza.id, "amount": amount, "specials": [Gluten, Lactose] })
     }
     const date = getDateNow();
     const formData = {
@@ -193,21 +193,21 @@ function createOrderForm(cart, prevOrders) {
             "day": date.day,
             "hour": date.hour,
             "minute": date.minute
-          },
+        },
         "customer": {
             "name": `${FName} ${LName}`,
             "email": Email,
             "address": {
-            "city": City,
-            "street": Address
+                "city": City,
+                "street": Address
             }
-          },
+        },
         "comments": Comms
     }
     return formData;
 }
 
 function getDateNow() {
-const date = new Date;
-return {year: date.getFullYear(), month: date.getMonth()+1, day: date.getDate(), hour: date.getHours(), minute: date.getMinutes()}    
+    const date = new Date;
+    return { year: date.getFullYear(), month: date.getMonth() + 1, day: date.getDate(), hour: date.getHours(), minute: date.getMinutes() }
 }

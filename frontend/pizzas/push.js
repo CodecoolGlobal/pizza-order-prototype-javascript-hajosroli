@@ -39,9 +39,9 @@ async function init(filter) {
     }
     document.querySelectorAll('#orderButton').forEach(item => {
         item.addEventListener('click', event => {
-             item.style.display = 'none';
+            item.style.display = 'none';
         })
-      })
+    })
 
 }
 
@@ -155,8 +155,7 @@ function createFilter(obj) {
     return filterHTML + "</ul>";
 }
 
-function sendItemToCart(itemID) {
-    fetch(`http://localhost:3000/cart/additem/${itemID}`)
-
+async function sendItemToCart(itemID) {
+    const msg = await fetch(`http://localhost:3000/cart/additem/${itemID}`)
 
 }

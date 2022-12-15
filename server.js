@@ -26,17 +26,19 @@ app.get('/api/orders', (req, res) => {
   res.send((fs.readFileSync("./orders.json").toString()))
 })
 
-app.post('/api/orders', async(req, res) => {
+app.post('/api/orders', async (req, res) => {
   const data = req.body;
   addOrderToFile(data)
   res.send((fs.readFileSync("./frontend/cart/cart.html").toString()))
 })
 
 app.delete('/api/:target/:itemID', async (req, res) => {
+  console.log("what")
   const itemID = parseInt(req.params.itemID)
   const target = req.params.target
-  if(itemID === undefined) console.log("success")
-  executeDeletion(target, itemID)
+  console.log(req.params.itemID)
+  if (!itemID && itemID != 0) deleteAllItemsFromFile()
+  else executeDeletion(target, itemID)
   res.send("DONE")
 })
 
@@ -68,8 +70,8 @@ app.get("/pizzas/list", async (req, res) => {
 app.get("/api/allergens", async (req, res) => {
   res.send(fs.readFileSync("./allergens.json").toString())
 })
-app.use(upload.array()); 
-app.use(bodyParser.urlencoded({ extended: true })); 
+app.use(upload.array());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());       // to support JSON-encoded bodies
 app.use(express.urlencoded({
   extended: true
@@ -105,4 +107,10 @@ async function addOrderToFile(order) {
   let data = await JSON.parse(fs.readFileSync("./orders.json"))
   data.orders.push(order);
   fs.writeFileSync("./orders.json", JSON.stringify(data, null, 2))
+}
+
+async function deleteAllItemsFromFile() {
+  let data = await JSON.parse(fs.readFileSync("./cart.json"))
+  while (data.cart[0].cartContent.length) data.cart[0].cartContent.pop()
+  fs.writeFileSync("./cart.json", JSON.stringify(data, null, 2))
 }

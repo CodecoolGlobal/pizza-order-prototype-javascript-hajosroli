@@ -3,6 +3,7 @@
     grid-template-columns: 2fr 10fr 2fr;
     background-color: rgb(53, 7, 15);
 }
+
 .frame {
     display: grid;
     /*grid-template-columns: 1fr 10fr 1fr;*/
@@ -12,11 +13,13 @@
     grid-template-rows: 50px 90px auto auto;
     padding-bottom: 50px;
 }
+
 .toolbar {
     grid-row: 1;
-    
+
 
 }
+
 .links {
     border-top-right-radius: 20px;
     border-top-left-radius: 20px;
@@ -26,18 +29,18 @@
     padding: 0;
     overflow: hidden;
     /*grid-column: 2;*/
-    
+
 }
 
 li {
     float: left;
-    
+
 }
 
-li a  {
+li a {
     display: block;
-    
-   
+
+
     color: #f2f2f2;
     text-align: center;
     padding: 14px 30px;
@@ -45,12 +48,15 @@ li a  {
     font-size: 17px;
     justify-self: center;
 }
+
 li a:hover {
     background-color: grey;
-  }
+}
+
 li {
     cursor: pointer;
 }
+
 /*.menu {
     background-color: black;
     color: white;
@@ -61,9 +67,10 @@ li {
     justify-self: center;
 }*/
 
-#contact, #cart {
-    float:right;
-    
+#contact,
+#cart {
+    float: right;
+
 }
 
 .filterMenu {
@@ -80,6 +87,7 @@ li {
     align-self: center;
     align-items: center;
 }
+
 #filterTitle {
     display: flex;
     grid-column: 1;
@@ -93,10 +101,12 @@ li {
     float: left;
     padding-inline-start: 0px;
 }
+
 .filterList {
     list-style-type: none;
     padding-inline-start: 0px;
 }
+
 label {
     margin-right: 10px;
 }
@@ -115,7 +125,7 @@ label {
     height: 100%;
     backdrop-filter: blur(5px);
     transition: .5s ease;
-  }
+}
 
 #name {
     position: relative;
@@ -127,7 +137,7 @@ label {
     position: relative;
     grid-row: 2;
     justify-self: start;
-    
+
 }
 
 #allergens {
@@ -173,21 +183,21 @@ label {
 
 .cards {
     position: relative;
-        background: rgba(0, 0, 0, 0.733);
-        border-radius: 9px;
-        border-style:groove;    
-        margin-left: 4%;
-        margin-bottom: 6%;
-        display: grid;
-        /*grid-template-rows: 3fr 3fr 3fr 1fr;
+    background: rgba(0, 0, 0, 0.733);
+    border-radius: 9px;
+    border-style: groove;
+    margin-left: 4%;
+    margin-bottom: 6%;
+    display: grid;
+    /*grid-template-rows: 3fr 3fr 3fr 1fr;
         grid-template-columns: 1fr;*/
-        font-size: 20px;
-        color: white;
-        box-shadow: 25px 25px 40px 0px rgba(0,0,0,0.33);
-        height: 300px;
-        width: 40%;
-        float: left;
-        overflow: hidden;
+    font-size: 20px;
+    color: white;
+    box-shadow: 25px 25px 40px 0px rgba(0, 0, 0, 0.33);
+    height: 300px;
+    width: 40%;
+    float: left;
+    overflow: hidden;
 }
 
 .img {
@@ -202,7 +212,7 @@ label {
     margin-right: 1%;
 }
 
-.cards:hover .overlay{
+.cards:hover .overlay {
     width: 100%;
     left: 0;
 }
@@ -211,36 +221,42 @@ label {
     from {
         grid-template-columns: 100%;
     }
+
     to {
         grid-template-columns: 1fr 1fr;
     }
 }
 
 @import url(https://fonts.googleapis.com/css?family=Cabin+Sketch:700|Patrick+Hand+SC|Waiting+for+the+Sunrise);
-.formContainer{
-  font-family:Patrick Hand SC;
-  font-size:25px;
-  /*background-image:url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSs5FtRG4p7xaINAsAJvCHPI6pwOsn3_SIupRyiZxWtG9ubWAzm');*/
-  background-size:cover;
-  grid-row: 4;
+
+.formContainer {
+    font-family: Patrick Hand SC;
+    font-size: 25px;
+    /*background-image:url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSs5FtRG4p7xaINAsAJvCHPI6pwOsn3_SIupRyiZxWtG9ubWAzm');*/
+    background-size: cover;
+    grid-row: 4;
 }
-h1{
-  font-family:Cabin Sketch;
-  font-size:80px;
+
+h1 {
+    font-family: Cabin Sketch;
+    font-size: 80px;
 }
-.form{
-  background-color:#211e1e;
-  color:white;
-  border-radius:5px;
-  height:auto;
-  width:450px;
+
+.form {
+    background-color: #211e1e;
+    color: white;
+    border-radius: 5px;
+    height: auto;
+    width: 450px;
 }
-#wrapper{
-  margin-top:-50px;
- float:center;
+
+#wrapper {
+    margin-top: -50px;
+    float: center;
 }
+
 #formInput {
-  font-family:Waiting for the Sunrise;
-  font-size:17px;
-  font-weight:bold;
+    font-family: Waiting for the Sunrise;
+    font-size: 17px;
+    font-weight: bold;
 }

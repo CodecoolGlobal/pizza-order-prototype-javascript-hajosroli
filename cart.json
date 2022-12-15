@@ -3,43 +3,7 @@
     {
       "userID": "developer",
       "referID": 0,
-      "cartContent": [
-        {
-          "id": 6,
-          "name": "Carbonara",
-          "alt_name": "carbonara",
-          "ingredients": [
-            "garlic",
-            "oregano",
-            "olive oil",
-            "purple onion",
-            "eggs",
-            "ham"
-          ],
-          "price": 3200,
-          "allergens": [
-            1,
-            2,
-            3
-          ]
-        },
-        {
-          "id": 7,
-          "name": "Nuttee",
-          "alt_name": "nuttee",
-          "ingredients": [
-            "Nutella",
-            "mascarpone",
-            "sour cream"
-          ],
-          "price": 3500,
-          "allergens": [
-            1,
-            3,
-            5
-          ]
-        }
-      ]
+      "cartContent": []
     },
     {
       "userID": "123456",
