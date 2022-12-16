@@ -3,7 +3,23 @@
     {
       "userID": "developer",
       "referID": 0,
-      "cartContent": []
+      "cartContent": [
+        {
+          "id": 1,
+          "name": "Marinara",
+          "alt_name": "marinara",
+          "ingredients": [
+            "San Marzano tomato sauce",
+            "garlic",
+            "oregano",
+            "olive oil"
+          ],
+          "price": 3200,
+          "allergens": [
+            1
+          ]
+        }
+      ]
     },
     {
       "userID": "123456",

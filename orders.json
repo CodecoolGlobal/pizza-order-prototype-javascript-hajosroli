@@ -1,41 +1,41 @@
 {
   "orders": [
     {
-      "id": 0,
+      "id": 1,
       "pizzas": [
         {
-          "id": 3,
-          "amount": "2",
+          "id": 1,
+          "amount": "1",
           "specials": [
             "Gluten-free",
-            "Lactose-free"
+            "-"
           ]
         },
         {
           "id": 7,
-          "amount": "3",
+          "amount": "1",
           "specials": [
             "Gluten-free",
-            "Lactose-free"
+            "-"
           ]
         }
       ],
       "date": {
         "year": 2022,
         "month": 12,
-        "day": 15,
-        "hour": 22,
-        "minute": 58
+        "day": 16,
+        "hour": 9,
+        "minute": 11
       },
       "customer": {
-        "name": "Roland Aki Szereti a faszt",
-        "email": "rolikaaa",
+        "name": "Szova Kristóf",
+        "email": "szova.kristof@gmail.com",
         "address": {
           "city": "Budapest",
-          "street": "123"
+          "street": "123 Balzac"
         }
       },
-      "comments": "asd"
+      "comments": "42 kpcs"
     }
   ]
 }

@@ -96,11 +96,7 @@ function createCards(obj, allergens) {
 }
 
 function getInfoAboutElement(list) {
-    let stringedList = ""
-    for (let element of list) {
-        stringedList += element + ", ";
-    }
-    return stringedList.slice(0, stringedList.length - 2);
+    return list.join(", ")
 }
 
 function makeAllergensTitled(list, allergens) {
@@ -117,7 +113,6 @@ function makeAllergensTitled(list, allergens) {
 function makeListFiltered(obj, filter) {
     let newObj = { pizzas: [] };
     for (let element of obj.pizzas) newObj.pizzas.push(element)
-    // console.log(JSON.stringify(newObj, null, 2))
     let shouldItBeOnTheList = true;
     for (let allergen of filter) {
         for (let element of obj.pizzas) {
@@ -157,5 +152,5 @@ function createFilter(obj) {
 
 async function sendItemToCart(itemID) {
     const msg = await fetch(`http://localhost:3000/cart/additem/${itemID}`)
-
+    
 }
